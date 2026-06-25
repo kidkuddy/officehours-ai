@@ -3,150 +3,58 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OfficeHours.ai — AINS Hackathon 2026 (Final Deck)</title>
+<title>OfficeHours.ai — Pitch</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
   :root{
-    --ink:#0A0A0A;
-    --muted:#6B7280;
-    --line:#E7E7E7;
-    --accent:#FB651E;        /* YC orange */
-    --accent-soft:#FFF1EA;
-    --bg:#FFFFFF;
-    --maxw:1000px;
+    --ink:#0A0A0A; --muted:#6B7280; --line:#E7E7E7;
+    --accent:#FB651E; --accent-soft:#FFF1EA; --bg:#FFFFFF; --maxw:1000px;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html,body{height:100%}
-  body{
-    font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
-    background:#0d0d0d;
-    color:var(--ink);
-    -webkit-font-smoothing:antialiased;
-    overflow:hidden;
-  }
+  body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;background:#0d0d0d;color:var(--ink);-webkit-font-smoothing:antialiased;overflow:hidden}
   .deck{height:100vh;width:100vw;position:relative}
-  .slide{
-    position:absolute;inset:0;
-    display:none;
-    background:var(--bg);
-    padding:7vh 8vw;
-    flex-direction:column;
-    justify-content:center;
-  }
+  .slide{position:absolute;inset:0;display:none;background:var(--bg);padding:7vh 8vw;flex-direction:column;justify-content:center}
   .slide.active{display:flex;animation:fade .35s ease}
   @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-
-  .kicker{
-    font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
-    color:var(--accent);margin-bottom:1.4rem;display:flex;align-items:center;gap:.6rem;
-  }
+  .kicker{font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:1.4rem;display:flex;align-items:center;gap:.6rem}
   .kicker::before{content:"";width:26px;height:3px;background:var(--accent);border-radius:2px}
-
   h1{font-size:clamp(2.4rem,6vw,5rem);font-weight:900;letter-spacing:-.03em;line-height:1.02}
-  h2{font-size:clamp(1.9rem,4.2vw,3.2rem);font-weight:800;letter-spacing:-.02em;line-height:1.08;max-width:var(--maxw)}
-  .lead{font-size:clamp(1.05rem,1.9vw,1.5rem);color:var(--muted);font-weight:400;line-height:1.5;max-width:760px;margin-top:1.6rem}
-  p{line-height:1.55}
-
-  ul.points{list-style:none;margin-top:2.4rem;max-width:880px}
-  ul.points li{
-    font-size:clamp(1rem,1.7vw,1.4rem);font-weight:500;line-height:1.4;
-    padding:1rem 0 1rem 2.2rem;position:relative;border-top:1px solid var(--line);color:#1c1c1c;
-  }
-  ul.points li:last-child{border-bottom:1px solid var(--line)}
-  ul.points li::before{
-    content:"";position:absolute;left:0;top:1.5rem;width:9px;height:9px;border-radius:50%;
-    background:var(--accent);
-  }
-  ul.points li b{font-weight:800}
-  ul.points li span.sub{display:block;font-size:.95rem;color:var(--muted);font-weight:400;margin-top:.35rem}
-
-  /* numbered flow */
-  ol.flow{list-style:none;counter-reset:step;margin-top:2.4rem;max-width:920px}
-  ol.flow li{
-    counter-increment:step;position:relative;padding:1.05rem 0 1.05rem 3.6rem;
-    border-top:1px solid var(--line);font-size:clamp(1rem,1.6vw,1.32rem);font-weight:500;line-height:1.4;
-  }
-  ol.flow li:last-child{border-bottom:1px solid var(--line)}
-  ol.flow li::before{
-    content:counter(step);position:absolute;left:0;top:50%;transform:translateY(-50%);
-    width:34px;height:34px;border-radius:50%;background:var(--ink);color:#fff;
-    font-size:.95rem;font-weight:800;display:flex;align-items:center;justify-content:center;
-  }
-  ol.flow li b{font-weight:800}
-
-  /* stat block */
-  .stats{display:flex;gap:5vw;margin-top:3rem;flex-wrap:wrap}
+  h2{font-size:clamp(2rem,4.6vw,3.6rem);font-weight:800;letter-spacing:-.02em;line-height:1.08;max-width:var(--maxw)}
+  .lead{font-size:clamp(1.1rem,2vw,1.6rem);color:var(--muted);font-weight:400;line-height:1.5;max-width:760px;margin-top:1.6rem}
+  .big-line{font-size:clamp(2.2rem,5vw,4rem);font-weight:800;letter-spacing:-.02em;line-height:1.1;max-width:var(--maxw)}
+  .big-line .hl{color:var(--accent)}
+  .stats{display:flex;gap:6vw;margin-top:3rem;flex-wrap:wrap}
   .stat .big{font-size:clamp(3rem,8vw,6.5rem);font-weight:900;letter-spacing:-.04em;line-height:1}
   .stat .big.accent{color:var(--accent)}
   .stat .cap{font-size:1rem;color:var(--muted);margin-top:.6rem;max-width:260px;font-weight:500}
-
-  /* columns / cards */
-  .cols{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;margin-top:2.6rem}
-  .card{border:1px solid var(--line);border-radius:16px;padding:1.6rem 1.5rem;background:#fff}
-  .card .t{font-weight:800;font-size:1.2rem;letter-spacing:-.01em}
-  .card .t .dot{color:var(--accent)}
-  .card .d{color:var(--muted);font-size:.98rem;margin-top:.7rem;line-height:1.5}
-  .card ul{list-style:none;margin-top:.9rem}
-  .card ul li{font-size:.95rem;color:#1c1c1c;padding:.32rem 0 .32rem 1rem;position:relative}
-  .card ul li::before{content:"–";position:absolute;left:0;color:var(--accent)}
-
-  /* journey rail */
-  .rail{display:flex;gap:0;margin-top:3rem;align-items:stretch}
-  .phase{flex:1;border:1px solid var(--line);border-right:none;padding:1.6rem 1.4rem;position:relative}
-  .phase:last-child{border-right:1px solid var(--line);border-radius:0 16px 16px 0}
-  .phase:first-child{border-radius:16px 0 0 16px}
-  .phase .ph{font-weight:900;font-size:1.3rem;letter-spacing:-.01em}
-  .phase .ph .n{color:var(--accent);font-size:.8rem;display:block;letter-spacing:.12em;margin-bottom:.4rem;font-weight:700}
-  .phase .st{font-size:.92rem;color:var(--muted);margin-top:.7rem;line-height:1.5}
-  .gate{text-align:center;color:var(--accent);font-weight:800;font-size:1.4rem;display:flex;align-items:center;padding:0 .2rem}
-
-  /* pipeline (monospace data-flow) */
-  .pipe{margin-top:2.4rem;border:1px solid var(--line);border-radius:16px;background:#fafafa;
-    padding:1.6rem 1.8rem;font-family:'SFMono-Regular',ui-monospace,Menlo,Consolas,monospace;
-    font-size:clamp(.72rem,1.05vw,.95rem);line-height:1.7;color:#1c1c1c;white-space:pre;overflow:auto}
-  .pipe b{color:var(--accent);font-weight:700}
-
-  /* signal bars */
-  .signals{margin-top:2.4rem;max-width:780px;display:flex;flex-direction:column;gap:.95rem}
-  .sig{display:grid;grid-template-columns:170px 1fr 52px;align-items:center;gap:1rem}
-  .sig .lbl{font-weight:700;font-size:1rem}
-  .sig .track{height:12px;background:#f0f0f0;border-radius:999px;overflow:hidden}
-  .sig .fill{height:100%;background:var(--accent);border-radius:999px}
-  .sig .fill.low{background:#d9534f}
-  .sig .val{font-variant-numeric:tabular-nums;font-weight:800;font-size:1rem;text-align:right}
-  .sig .val.low{color:#d9534f}
-
-  /* footer / chrome */
-  .foot{position:absolute;left:8vw;right:8vw;bottom:3.5vh;display:flex;justify-content:space-between;align-items:center;
-    font-size:.8rem;color:var(--muted);font-weight:600;letter-spacing:.02em}
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1.6rem;margin-top:3rem}
+  .step .n{font-size:.8rem;font-weight:700;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+  .step .t{font-size:clamp(1.3rem,2.2vw,1.8rem);font-weight:800;letter-spacing:-.01em;margin-top:.5rem;line-height:1.1}
+  .step .d{color:var(--muted);font-size:1rem;margin-top:.5rem;line-height:1.5}
+  ul.lean{list-style:none;margin-top:2.4rem;max-width:840px}
+  ul.lean li{font-size:clamp(1.15rem,2vw,1.6rem);font-weight:600;padding:.9rem 0 .9rem 2rem;position:relative;border-top:1px solid var(--line);color:#1c1c1c}
+  ul.lean li:last-child{border-bottom:1px solid var(--line)}
+  ul.lean li::before{content:"";position:absolute;left:0;top:1.5rem;width:9px;height:9px;border-radius:50%;background:var(--accent)}
+  ul.lean li span{display:block;font-size:.95rem;color:var(--muted);font-weight:400;margin-top:.25rem}
+  .foot{position:absolute;left:8vw;right:8vw;bottom:3.5vh;display:flex;justify-content:space-between;align-items:center;font-size:.8rem;color:var(--muted);font-weight:600}
   .wordmark{font-weight:900;color:var(--ink);letter-spacing:-.02em}
   .wordmark .dot{color:var(--accent)}
   .pageno{font-variant-numeric:tabular-nums}
-
-  /* title slide special */
   .title-slide{justify-content:center}
   .title-slide .big-mark{font-size:clamp(3.5rem,12vw,9rem);font-weight:900;letter-spacing:-.05em;line-height:.95}
   .title-slide .big-mark .dot{color:var(--accent)}
-  .title-slide .tag{font-size:clamp(1.1rem,2.4vw,1.9rem);font-weight:500;color:var(--muted);margin-top:1.6rem;letter-spacing:-.01em}
-  .badge{display:inline-block;background:var(--accent-soft);color:var(--accent);font-weight:700;font-size:.8rem;
-    letter-spacing:.1em;text-transform:uppercase;padding:.5rem .9rem;border-radius:999px;margin-bottom:2.2rem;width:fit-content}
-
-  /* progress bar */
+  .title-slide .tag{font-size:clamp(1.1rem,2.4vw,1.9rem);font-weight:500;color:var(--muted);margin-top:1.4rem}
+  .badge{display:inline-block;background:var(--accent-soft);color:var(--accent);font-weight:700;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;padding:.5rem .9rem;border-radius:999px;margin-bottom:2rem;width:fit-content}
   .progress{position:fixed;top:0;left:0;height:3px;background:var(--accent);z-index:50;transition:width .3s ease}
-
-  /* nav hint */
-  .hint{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);font-size:.72rem;color:#bbb;z-index:50;
-    background:rgba(255,255,255,.7);padding:4px 12px;border-radius:999px;backdrop-filter:blur(6px)}
-
-  /* PRINT: one slide per page for PDF export */
+  .hint{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);font-size:.72rem;color:#bbb;z-index:50;background:rgba(255,255,255,.7);padding:4px 12px;border-radius:999px;backdrop-filter:blur(6px)}
   @media print{
     @page{size:1280px 720px;margin:0}
     body{overflow:visible;background:#fff}
     .deck{height:auto}
-    .slide, .slide.active{display:flex!important;position:relative;inset:auto;page-break-after:always;
-      width:1280px;height:720px;padding:64px 96px;animation:none!important;opacity:1!important}
+    .slide,.slide.active{display:flex!important;position:relative;inset:auto;page-break-after:always;width:1280px;height:720px;padding:64px 96px;animation:none!important;opacity:1!important}
     .progress,.hint{display:none!important}
   }
 </style>
@@ -155,267 +63,121 @@
 <div class="progress" id="progress"></div>
 <div class="deck" id="deck">
 
-  <!-- 1 TITLE -->
+  <!-- 1 COVER -->
   <section class="slide title-slide active">
     <span class="badge">AINS Hackathon 2026</span>
     <div class="big-mark">OfficeHours<span class="dot">.ai</span></div>
     <div class="tag">Office hours for founders, on demand.</div>
-    <p class="lead">An AI advisory platform that diagnoses where a startup actually stands — and tells it what to do next, grounded in real programs.</p>
     <div class="foot"><span class="wordmark">OfficeHours<span class="dot">.ai</span></span><span class="pageno">01</span></div>
   </section>
 
   <!-- 2 PROBLEM -->
   <section class="slide">
-    <div class="kicker">The Problem</div>
-    <h2>Tunisian founders are better at pitching than at building.</h2>
-    <p class="lead">Strong decks attract praise. Praise feeds confirmation bias and a chase for vanity metrics — so founders mistake momentum for progress and double down on the wrong things. Real mentorship doesn't scale to 1,000+ teams.</p>
+    <div class="kicker">The problem</div>
+    <h2>Founders are great at pitching. That's the problem.</h2>
     <div class="stats">
-      <div class="stat"><div class="big">1,000+</div><div class="cap">startups labeled under the Startup Act</div></div>
-      <div class="stat"><div class="big accent">&lt;10</div><div class="cap">meet VC standards of success</div></div>
+      <div class="stat"><div class="big">1,000+</div><div class="cap">startups under the Startup Act</div></div>
+      <div class="stat"><div class="big accent">&lt;10</div><div class="cap">reach VC-grade success</div></div>
     </div>
     <div class="foot"><span class="wordmark">OfficeHours<span class="dot">.ai</span></span><span class="pageno">02</span></div>
   </section>
 
-  <!-- 3 SOLUTION -->
+  <!-- 3 INSIGHT -->
   <section class="slide">
-    <div class="kicker">The Solution</div>
-    <h2>Real office hours — with specialist AI Advisors.</h2>
-    <ul class="points">
-      <li>A founder describes their company <b>once</b>; the system stands up an evidence-based profile and a maturity <b>stage</b>.</li>
-      <li>They hold chat <b>Office Hours</b> with specialist Advisors — Product, Go-to-Market, Fundraising, Pitch — each an AI agent grounded in the company's <b>Data Room</b> and a catalogue of real programs.</li>
-      <li>Concluding a session <b>recomputes 5 Signals</b>, creates Goals and Action Items, and writes the founder's <b>Mon Parcours</b> timeline.</li>
-    </ul>
+    <div class="kicker">Why</div>
+    <div class="big-line">Praise feels like progress. Founders chase <span class="hl">vanity metrics</span> and burn their runway on the wrong things.</div>
     <div class="foot"><span class="wordmark">OfficeHours<span class="dot">.ai</span></span><span class="pageno">03</span></div>
   </section>
 
-  <!-- 4 TARGET USERS -->
+  <!-- 4 SOLUTION -->
   <section class="slide">
-    <div class="kicker">Who It's For</div>
-    <h2>The people who need honest guidance most.</h2>
-    <ul class="points">
-      <li><b>Early- and growth-stage founders</b> in Tunisia &amp; MENA — pre-seed to early revenue.</li>
-      <li><b>Aspiring founders &amp; students</b> who want to learn entrepreneurship by doing, via the <b>Learn</b> concept tutors.</li>
-      <li><b>Incubators &amp; programs</b> that need to advise more founders than their human mentors can ever cover.</li>
-    </ul>
+    <div class="kicker">The solution</div>
+    <div class="big-line">Tell them where they <span class="hl">actually stand</span> — and exactly what to do next.</div>
+    <p class="lead">An AI advisory practice that diagnoses a startup, scores it honestly, and points to real programs.</p>
     <div class="foot"><span class="wordmark">OfficeHours<span class="dot">.ai</span></span><span class="pageno">04</span></div>
   </section>
 
-  <!-- 5 VALUE PROPOSITION -->
+  <!-- 5 HOW (non-tech) -->
   <section class="slide">
-    <div class="kicker">Value Proposition</div>
-    <h2>Honest, evidence-based, and it scales.</h2>
-    <div class="cols">
-      <div class="card">
-        <div class="t">Diagnose, don't flatter<span class="dot">.</span></div>
-        <div class="d">Places the startup at its real stage from the evidence — and resists the founder's over-claim.</div>
-      </div>
-      <div class="card">
-        <div class="t">Explainable scores<span class="dot">.</span></div>
-        <div class="d">Every Signal decomposes into weighted sub-criteria, each traced to evidence. No black box.</div>
-      </div>
-      <div class="card">
-        <div class="t">Action, grounded<span class="dot">.</span></div>
-        <div class="d">Each gap becomes an Action Item matched to a real APII / BFPME / Startup Act program, with the source attached.</div>
-      </div>
+    <div class="kicker">How it works</div>
+    <h2>Three steps.</h2>
+    <div class="steps">
+      <div class="step"><div class="n">01</div><div class="t">Describe</div><div class="d">A founder describes their company once.</div></div>
+      <div class="step"><div class="n">02</div><div class="t">Diagnose</div><div class="d">We place them on the journey and score their readiness.</div></div>
+      <div class="step"><div class="n">03</div><div class="t">Advise</div><div class="d">They hold office hours with specialist advisors who set the next moves.</div></div>
     </div>
-    <p class="lead" style="margin-top:2rem">One platform gives every founder a panel of specialist advisors — at a cost and availability no human mentor pool can match.</p>
     <div class="foot"><span class="wordmark">OfficeHours<span class="dot">.ai</span></span><span class="pageno">05</span></div>
   </section>
 
-  <!-- 6 DEMO WALKTHROUGH -->
+  <!-- 6 DIFFERENTIATOR -->
   <section class="slide">
-    <div class="kicker">Demo Walkthrough</div>
-    <h2>Onboard → advise → conclude → orient.</h2>
-    <ol class="flow">
-      <li>Founder onboards with a company description. The <b>diagnoser</b> sets the stage with evidence and seeds initial Signals.</li>
-      <li>They open <b>Office Hours with the Product Advisor</b> and chat; the advisor grounds replies in the KB and the Data Room.</li>
-      <li>They hit <b>Conclude</b>. The <b>scorer</b> updates the 5 Signals with breakdowns + rationale, creates Goals and Action Items, writes a parcours event.</li>
-      <li>The <b>Dashboard</b> shows the stage, the 5 Signals with sub-score breakdowns, goals, and Mon Parcours. A <b>Data Room</b> upload is indexed and can be cited.</li>
-    </ol>
+    <div class="kicker">Why it's different</div>
+    <div class="big-line">Advisors who have <span class="hl">read your file</span> before they speak.</div>
+    <p class="lead">Evidence over opinion. Honest scores, not flattery. Every next step tied to a real program — not a chatbot.</p>
     <div class="foot"><span class="wordmark">OfficeHours<span class="dot">.ai</span></span><span class="pageno">06</span></div>
   </section>
 
-  <!-- 7 ARCHITECTURE -->
+  <!-- 7 DEMO -->
   <section class="slide">
-    <div class="kicker">Architecture</div>
-    <h2>claude → ohctl → job worker → Postgres.</h2>
-    <p class="lead" style="margin-top:1rem">The brain is <b style="color:#1c1c1c">Claude Code headless</b> (host subscription auth). HTTP handlers only enqueue jobs; a worker pool runs <code>claude -p</code>, and the agent's only hands on the database are the JSON CLI <b style="color:#1c1c1c">ohctl</b>.</p>
-    <div class="pipe">web ──/api/*──▶ <b>api (Go)</b> ──insert──▶ agent_jobs (queued)
-                       │                          ▲
-        return {job_id}│                          │ poll
-                       ▼                          │
-              ┌──────── <b>job worker</b> ───────────────┐
-              │ claude -p "&lt;prompt&gt;" --output-format json │
-              │   --dangerously-skip-permissions          │
-              │            │ agent uses                    │
-              │            ▼                               │
-              │      <b>ohctl</b> (JSON CLI): read context +     │
-              │      write signals / goals / action-items │
-              │      / messages / events                  │
-              └──────────────────┬───────────────────────┘
-                                 ▼ SQL
-                           <b>db (postgres + FTS)</b></div>
+    <div class="kicker">Demo</div>
+    <h2>They walk in "seed-ready." They leave knowing the truth.</h2>
+    <p class="lead">See the 3-minute walkthrough: onboarding → diagnosis → office hours → next steps.</p>
     <div class="foot"><span class="wordmark">OfficeHours<span class="dot">.ai</span></span><span class="pageno">07</span></div>
   </section>
 
-  <!-- 8 CORE AI ENGINE -->
+  <!-- 8 WHO -->
   <section class="slide">
-    <div class="kicker">Core AI Mechanism</div>
-    <h2>Every Advisor runs the same four-step engine.</h2>
-    <div class="cols" style="grid-template-columns:repeat(4,1fr);gap:1rem">
-      <div class="card">
-        <div style="font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:.5rem">Step 01</div>
-        <div class="t">Read</div>
-        <div class="d">Ingests the Dossier — company text, Data Room, Signals, and past sessions — via ohctl.</div>
-      </div>
-      <div class="card">
-        <div style="font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:.5rem">Step 02</div>
-        <div class="t">Diagnose</div>
-        <div class="d">Places the startup at one of 6 maturity stages, tied to the evidence behind it.</div>
-      </div>
-      <div class="card">
-        <div style="font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:.5rem">Step 03</div>
-        <div class="t">Score</div>
-        <div class="d">Computes the 5 Signals across weighted criteria, with a per-criterion breakdown.</div>
-      </div>
-      <div class="card">
-        <div style="font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:.5rem">Step 04</div>
-        <div class="t">Orient</div>
-        <div class="d">Turns each gap into an Action Item matched to a real program, with the source attached.</div>
-      </div>
-    </div>
-    <p class="lead" style="margin-top:2rem">Grounding comes from a <b style="color:#1c1c1c">Postgres full-text KB</b> of 30+ national &amp; international support and financing programs (APII, BFPME, BTS, Startup Act, AFD, EU, UNDP).</p>
+    <div class="kicker">Who it's for</div>
+    <h2>Tunisia &amp; MENA founders — and the people backing them.</h2>
+    <p class="lead">Early-stage founders, first-timers learning by doing, and incubators that can't give every founder a mentor.</p>
     <div class="foot"><span class="wordmark">OfficeHours<span class="dot">.ai</span></span><span class="pageno">08</span></div>
   </section>
 
-  <!-- 9 SCORING MODEL -->
+  <!-- 9 STATUS -->
   <section class="slide">
-    <div class="kicker">Scoring &amp; Explainability</div>
-    <h2>5 Signals on a stress-test framework.</h2>
-    <div class="cols">
-      <div class="card">
-        <div class="t">Desirability<span class="dot">.</span></div>
-        <ul><li>Problem-fit defined</li><li>Customer validation</li><li>Market size &amp; competition</li></ul>
-      </div>
-      <div class="card">
-        <div class="t">Feasibility<span class="dot">.</span></div>
-        <ul><li>Value-prop &amp; differentiation</li><li>Product readiness</li><li>Scalability &amp; manual dependency</li></ul>
-      </div>
-      <div class="card">
-        <div class="t">Viability<span class="dot">.</span></div>
-        <ul><li>Revenue model &amp; pricing</li><li>Unit economics</li><li>Sustainability &amp; SDG (Green)</li></ul>
-      </div>
-    </div>
-    <p class="lead" style="margin-top:2rem">The five composites — <b style="color:#1c1c1c">Market, Commercial Offer, Innovation, Scalability, Green</b> — are expressed across these three lenses.</p>
+    <div class="kicker">Today</div>
+    <div class="big-line">It already works.</div>
+    <p class="lead">A live MVP: real onboarding, evidence-based diagnosis, scored readiness, advisor sessions, and a knowledge base of real Tunisian &amp; international programs.</p>
     <div class="foot"><span class="wordmark">OfficeHours<span class="dot">.ai</span></span><span class="pageno">09</span></div>
   </section>
 
-  <!-- 10 GATED AGGREGATION / EXPLAINABILITY -->
+  <!-- 10 LIMITATIONS -->
   <section class="slide">
-    <div class="kicker">Why It's Honest</div>
-    <h2>A weak fundamental caps the whole score.</h2>
-    <p class="lead" style="margin-top:1rem">Composites are <b style="color:#1c1c1c">not averages</b>. If a fundamental sub-criterion scores below the floor, it caps the composite — strength elsewhere cannot offset a missing fundamental, and the explanation names it.</p>
-    <div class="signals">
-      <div class="sig"><div class="lbl">Market</div><div class="track"><div class="fill low" style="width:48%"></div></div><div class="val low">2.4</div></div>
-      <div class="sig"><div class="lbl">Commercial Offer</div><div class="track"><div class="fill" style="width:64%"></div></div><div class="val">3.2</div></div>
-      <div class="sig"><div class="lbl">Innovation</div><div class="track"><div class="fill" style="width:74%"></div></div><div class="val">3.7</div></div>
-      <div class="sig"><div class="lbl">Scalability</div><div class="track"><div class="fill" style="width:56%"></div></div><div class="val">2.8</div></div>
-      <div class="sig"><div class="lbl">Green</div><div class="track"><div class="fill" style="width:60%"></div></div><div class="val">3.0</div></div>
-    </div>
-    <p class="lead" style="margin-top:1.6rem;font-size:1.05rem">"Market: 2.4 / 5 — capped by weak customer validation (1.0); strong market sizing (4.0) cannot offset a missing fundamental. Highest-leverage action: collect 5 customer interviews or one signed LOI."</p>
+    <div class="kicker">Honest limits</div>
+    <h2>What it doesn't do yet.</h2>
+    <ul class="lean">
+      <li>Advice is only as good as what the founder shares.</li>
+      <li>The program knowledge base is a curated start, not exhaustive.</li>
+      <li>Scoring is calibrated on a small set — it grows with real use.</li>
+    </ul>
     <div class="foot"><span class="wordmark">OfficeHours<span class="dot">.ai</span></span><span class="pageno">10</span></div>
   </section>
 
-  <!-- 11 JOURNEY -->
+  <!-- 11 NEXT -->
   <section class="slide">
-    <div class="kicker">The Journey</div>
-    <h2>From idea to scale, one gate at a time.</h2>
-    <div class="rail">
-      <div class="phase"><div class="ph"><span class="n">PHASE 01</span>Discover</div><div class="st">Ideation · Market Validation</div></div>
-      <div class="gate">▸</div>
-      <div class="phase"><div class="ph"><span class="n">PHASE 02</span>Validate</div><div class="st">Structuration · Launch Planning</div></div>
-      <div class="gate">▸</div>
-      <div class="phase"><div class="ph"><span class="n">PHASE 03</span>Scale</div><div class="st">Fundraising · Growth</div></div>
-    </div>
-    <p class="lead" style="margin-top:2.4rem">Each session re-evaluates the Signals; the founder's <b style="color:#1c1c1c">Mon Parcours</b> timeline records every stage change, score update, and goal across the whole journey.</p>
+    <div class="kicker">What's next</div>
+    <h2>From hackathon MVP to a founder's standing desk.</h2>
+    <ul class="lean">
+      <li>Pilot with a Tunisian incubator cohort.</li>
+      <li>Grow the program base with the PNUD / GEWEET ecosystem.</li>
+      <li>Track founders over time as they close the gap.</li>
+    </ul>
     <div class="foot"><span class="wordmark">OfficeHours<span class="dot">.ai</span></span><span class="pageno">11</span></div>
   </section>
 
-  <!-- 12 LIMITATIONS -->
-  <section class="slide">
-    <div class="kicker">Limitations</div>
-    <h2>What the MVP doesn't do yet.</h2>
-    <ul class="points">
-      <li><b>Lexical retrieval.</b> Grounding uses Postgres full-text search, not embeddings — synonyms and paraphrase can be missed.</li>
-      <li><b>Non-deterministic scoring.</b> The same profile can vary run-to-run; we report results over multiple runs and are tuning for consistency.</li>
-      <li><b>Point-in-time KB.</b> 30+ real programs are snapshots with source URLs; deadlines and amounts drift and need operational upkeep.</li>
-      <li><b>Plan-A auth.</b> The brain reuses a host Claude subscription, which is great for the demo but not yet a multi-tenant production posture.</li>
-    </ul>
-    <div class="foot"><span class="wordmark">OfficeHours<span class="dot">.ai</span></span><span class="pageno">12</span></div>
-  </section>
-
-  <!-- 13 EVALUATION -->
-  <section class="slide">
-    <div class="kicker">Evaluation</div>
-    <h2>We measure the diagnosis, not just the vibe.</h2>
-    <ul class="points">
-      <li>A labeled set of <b>~8–10 founder profiles</b> with expert-assigned stages, including an over-claiming adversarial case.</li>
-      <li>Each runs through the <b>real diagnoser pipeline</b>; we report stage-classification accuracy, a confusion matrix, and over-claim catch rate.</li>
-      <li>Signals are checked for <b>consistency</b> and agreement with expert score bands — full results to be filled after running <b>backend/eval</b>.</li>
-    </ul>
-    <div class="foot"><span class="wordmark">OfficeHours<span class="dot">.ai</span></span><span class="pageno">13</span></div>
-  </section>
-
-  <!-- 14 NEXT STEPS -->
-  <section class="slide">
-    <div class="kicker">Next Steps</div>
-    <h2>From hackathon MVP to platform.</h2>
-    <div class="cols">
-      <div class="card">
-        <div class="t">Smarter grounding<span class="dot">.</span></div>
-        <div class="d">Hybrid FTS + embeddings retrieval; multilingual (FR/AR) program coverage and auto-refresh from sources.</div>
-      </div>
-      <div class="card">
-        <div class="t">Stage-gate reviews<span class="dot">.</span></div>
-        <div class="d">Formal gate criteria to advance phases, and advisor unlocks earned as Signals clear thresholds.</div>
-      </div>
-      <div class="card">
-        <div class="t">For programs<span class="dot">.</span></div>
-        <div class="d">Incubator dashboards over cohorts, calibrated scoring, and production multi-tenant auth.</div>
-      </div>
-    </div>
-    <p class="lead" style="margin-top:2rem">Expand the labeled eval set, calibrate weights and the floor, and turn explainable Signals into a cohort-level diagnostic for the whole ecosystem.</p>
-    <div class="foot"><span class="wordmark">OfficeHours<span class="dot">.ai</span></span><span class="pageno">14</span></div>
-  </section>
-
-  <!-- 15 THANKS -->
+  <!-- 12 CLOSE -->
   <section class="slide title-slide">
     <div class="big-mark">Thank you<span class="dot">.</span></div>
-    <p class="lead">OfficeHours.ai — office hours for founders, on demand. Diagnose where you actually stand, and earn the next room.</p>
-    <div class="foot"><span class="wordmark">OfficeHours<span class="dot">.ai</span></span><span class="pageno">15</span></div>
+    <p class="tag">OfficeHours.ai — know where you stand.</p>
+    <div class="foot"><span class="wordmark">The Jew, the Sad &amp; the Buggy</span><span class="pageno">12</span></div>
   </section>
 
 </div>
-
-<div class="hint">← → or Space to navigate · F fullscreen · P to print/PDF</div>
-
+<div class="hint">← → or Space · F fullscreen · P to print/PDF</div>
 <script>
-  const slides=[...document.querySelectorAll('.slide')];
-  let i=0;
-  const prog=document.getElementById('progress');
-  function show(n){
-    i=Math.max(0,Math.min(slides.length-1,n));
-    slides.forEach((s,k)=>s.classList.toggle('active',k===i));
-    prog.style.width=((i+1)/slides.length*100)+'%';
-  }
-  document.addEventListener('keydown',e=>{
-    if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){e.preventDefault();show(i+1);}
-    else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();show(i-1);}
-    else if(e.key==='Home'){show(0);}
-    else if(e.key==='End'){show(slides.length-1);}
-    else if(e.key.toLowerCase()==='f'){if(!document.fullscreenElement)document.documentElement.requestFullscreen();else document.exitFullscreen();}
-    else if(e.key.toLowerCase()==='p'){window.print();}
-  });
+  const slides=[...document.querySelectorAll('.slide')];let i=0;const prog=document.getElementById('progress');
+  function show(n){i=Math.max(0,Math.min(slides.length-1,n));slides.forEach((s,k)=>s.classList.toggle('active',k===i));prog.style.width=((i+1)/slides.length*100)+'%';}
+  document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){e.preventDefault();show(i+1);}else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();show(i-1);}else if(e.key==='Home'){show(0);}else if(e.key==='End'){show(slides.length-1);}else if(e.key.toLowerCase()==='f'){if(!document.fullscreenElement)document.documentElement.requestFullscreen();else document.exitFullscreen();}else if(e.key.toLowerCase()==='p'){window.print();}});
   document.addEventListener('click',e=>{if(e.clientX>window.innerWidth*0.5)show(i+1);else show(i-1);});
   show(0);
 </script>
