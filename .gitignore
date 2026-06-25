@@ -35,3 +35,6 @@ backend/eval/report.json
 *.swp
 landing.png
 oh-landing.png
+
+# demo video (uploaded to the form, not the repo)
+*.mp4
