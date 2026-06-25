@@ -1,0 +1,260 @@
+/* ============================================================
+   OfficeHours.ai — "The Practice"
+   Design tokens. A calm, premium advisory room rendered in
+   warm paper + deep blue-ink + restrained antique brass.
+   Deliberately NOT the near-black/neon dashboard default.
+   ============================================================ */
+
+:root {
+  /* --- Core surfaces (warm, editorial light) --- */
+  --paper: #f3efe6;        /* app canvas — warm bone */
+  --paper-2: #ece6d9;      /* recessed wells, rails */
+  --card: #fbf9f4;         /* raised dossier surface */
+  --card-pure: #ffffff;    /* highest surface (inputs, popovers) */
+
+  /* --- Ink (deep blue-black, never neutral gray) --- */
+  --ink: #14181f;          /* primary text / dark structural fields */
+  --ink-2: #232a35;        /* ink panels, dark headers */
+  --ink-soft: #2f3845;
+  --slate: #565f6d;        /* secondary text */
+  --slate-2: #828b98;      /* tertiary / captions */
+  --faint: #a7a194;        /* hairline labels on paper */
+
+  /* --- Signature accent: antique brass --- */
+  --brass: #9a6a2f;
+  --brass-deep: #7e5523;
+  --brass-bright: #b8893f;
+  --brass-wash: #efe3cf;   /* tinted fill behind accent chips */
+  --brass-ink: #f4ddb4;    /* brass text on dark ink */
+
+  /* --- Hairlines & dividers --- */
+  --line: #e1dac9;         /* hairline on paper */
+  --line-strong: #d2c9b4;
+  --line-ink: #323b48;     /* hairline on ink panels */
+
+  /* --- Signal bands (muted, instrument-grade) --- */
+  --band-good: #5e8c6a;    /* sage */
+  --band-good-soft: #dbe7dc;
+  --band-mid: #c68a2e;     /* amber */
+  --band-mid-soft: #f0e3c8;
+  --band-weak: #b5563e;    /* clay */
+  --band-weak-soft: #f0d8cf;
+
+  /* --- Status --- */
+  --ok: #5e8c6a;
+  --warn: #c68a2e;
+  --err: #b5563e;
+  --err-wash: #f4dcd4;
+
+  /* --- Radii: soft, dossier-like but not pill --- */
+  --r-xs: 6px;
+  --r-sm: 9px;
+  --r: 13px;
+  --r-lg: 20px;
+  --r-xl: 28px;
+
+  /* --- Shadows: paper lift, low + warm --- */
+  --sh-1: 0 1px 2px rgba(31, 26, 16, 0.06), 0 1px 1px rgba(31, 26, 16, 0.04);
+  --sh-2: 0 4px 14px rgba(31, 26, 16, 0.07), 0 1px 3px rgba(31, 26, 16, 0.05);
+  --sh-3: 0 18px 48px rgba(20, 24, 31, 0.16), 0 4px 14px rgba(20, 24, 31, 0.08);
+  --sh-ink: 0 14px 40px rgba(20, 24, 31, 0.45);
+
+  /* --- Type --- */
+  --font-display: "Fraunces", "Iowan Old Style", Georgia, serif;
+  --font-sans: "Spline Sans", system-ui, -apple-system, sans-serif;
+  --font-mono: "Spline Sans Mono", ui-monospace, "SFMono-Regular", monospace;
+
+  --maxw: 1080px;
+
+  /* Rail surface (the dark navigation spine). Tokenised so both themes
+     can tune it without literal hexes leaking into layout.css. */
+  --rail-top: #161b23;
+  --rail-bottom: #14181f;
+  --rail-seam: rgba(154, 106, 47, 0.35);
+  --rail-text: #aeb6c2;
+  --rail-text-strong: #f1f3f6;
+  --rail-label: #5d6675;
+  --rail-hover: rgba(255, 255, 255, 0.045);
+  --rail-active: rgba(154, 106, 47, 0.16);
+  --rail-line: var(--line-ink);
+  --grain-color: rgba(120, 100, 60, 0.05);
+  --grain-opacity: 0.55;
+
+  /* Buttons — tokenised so the dark "ink" button stays dark-on-light type. */
+  --btn-ink-bg: var(--ink);
+  --btn-ink-bg-hover: var(--ink-2);
+  --btn-ink-text: #f6f3ec;
+  --btn-primary-bg: var(--brass);
+  --btn-primary-bg-hover: var(--brass-bright);
+  --btn-primary-text: #1c1408;
+  --on-brass: #1c1408;     /* text/marks that sit on a brass fill */
+
+  /* Badges / alerts — accent borders + text on tinted washes. */
+  --brass-border: #e2cca3;
+  --green-text: #3f6b4b;
+  --green-border: #c2d8c4;
+  --err-text: #8c3a26;
+  --err-border: #e3b6aa;
+  --on-ink: #f0ecdf;       /* text on a solid ink fill (badge.ink, etc.) */
+
+  /* Code surfaces — always a dark instrument panel in both themes. */
+  --code-bg: #14181f;
+  --code-text: #e6e2d6;
+
+  /* easing */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ============================================================
+   DARK THEME — "The Practice" after hours.
+   Deep blue-ink room, raised ink dossiers, warm off-white type,
+   the SAME antique brass. Signal bands re-tuned to read on ink.
+   Intentional, not an inverted hack.
+   ============================================================ */
+[data-theme="dark"] {
+  /* --- Core surfaces (deep ink, layered) --- */
+  --paper: #11151b;        /* app canvas — deep blue-ink */
+  --paper-2: #1a2029;      /* recessed wells, rails, tracks */
+  --card: #1d242e;         /* raised dossier surface */
+  --card-pure: #232c38;    /* highest surface (inputs, popovers) */
+
+  /* --- Type (warm off-white, never pure white) --- */
+  --ink: #ece6d9;          /* primary text */
+  --ink-2: #d8d2c4;        /* near-primary, dark-on-dark fields stay light */
+  --ink-soft: #c3bdb0;
+  --slate: #a39d90;        /* secondary text */
+  --slate-2: #7e8794;      /* tertiary / captions */
+  --faint: #6b7280;
+
+  /* --- Signature accent: antique brass (slightly brighter on ink) --- */
+  --brass: #c79a52;
+  --brass-deep: #b8893f;
+  --brass-bright: #dcb46c;
+  --brass-wash: #2c2a20;   /* tinted fill behind accent chips on ink */
+  --brass-ink: #f4ddb4;
+
+  /* --- Hairlines & dividers --- */
+  --line: #2a323d;
+  --line-strong: #38424f;
+  --line-ink: #2a323d;
+
+  /* --- Signal bands (re-tuned for dark) --- */
+  --band-good: #6fae7a;    /* sage */
+  --band-good-soft: #20302a;
+  --band-mid: #d9a441;     /* amber */
+  --band-mid-soft: #322a18;
+  --band-weak: #cf6d52;    /* clay */
+  --band-weak-soft: #321f1a;
+
+  /* --- Status --- */
+  --ok: #6fae7a;
+  --warn: #d9a441;
+  --err: #cf6d52;
+  --err-wash: #321f1a;
+
+  /* --- Shadows: deeper, cooler on ink --- */
+  --sh-1: 0 1px 2px rgba(0, 0, 0, 0.35), 0 1px 1px rgba(0, 0, 0, 0.25);
+  --sh-2: 0 6px 18px rgba(0, 0, 0, 0.40), 0 1px 3px rgba(0, 0, 0, 0.30);
+  --sh-3: 0 22px 56px rgba(0, 0, 0, 0.55), 0 6px 18px rgba(0, 0, 0, 0.35);
+  --sh-ink: 0 16px 44px rgba(0, 0, 0, 0.60);
+
+  /* --- Rail: a touch raised above the canvas, brass seam preserved --- */
+  --rail-top: #1a212b;
+  --rail-bottom: #161c24;
+  --rail-seam: rgba(199, 154, 82, 0.40);
+  --rail-text: #b4bcc8;
+  --rail-text-strong: #f2efe7;
+  --rail-label: #6b7480;
+  --rail-hover: rgba(255, 255, 255, 0.05);
+  --rail-active: rgba(199, 154, 82, 0.18);
+  --rail-line: #2a323d;
+
+  /* paper grain → faint warm noise over ink */
+  --grain-color: rgba(199, 154, 82, 0.05);
+  --grain-opacity: 0.4;
+
+  /* Buttons on dark: the "ink" button becomes a raised dark surface with
+     warm-light type (a pale ink-coloured fill would vanish on the canvas);
+     primary stays brass with dark type. */
+  --btn-ink-bg: #2a333f;
+  --btn-ink-bg-hover: #333d4b;
+  --btn-ink-text: #f2efe7;
+  --btn-primary-bg: var(--brass);
+  --btn-primary-bg-hover: var(--brass-bright);
+  --btn-primary-text: #1c1408;
+  --on-brass: #1c1408;
+
+  /* Badges / alerts on dark: tints are deep, so text/borders go light. */
+  --brass-border: #4a3f29;
+  --green-text: #8fcb9a;
+  --green-border: #2f4a39;
+  --err-text: #e8a48f;
+  --err-border: #4a2c24;
+  --on-ink: #11151b;       /* text on an off-white ink fill */
+
+  /* Code surfaces on dark: lift slightly off the canvas. */
+  --code-bg: #161c24;
+  --code-text: #e6e2d6;
+
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+
+html, body, #root { height: 100%; margin: 0; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* paper grain — extremely subtle, keeps the light theme from feeling flat */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: var(--grain-opacity);
+  background-image: radial-gradient(var(--grain-color) 0.5px, transparent 0.5px);
+  background-size: 4px 4px;
+}
+
+a { color: var(--ink); text-decoration: none; }
+
+button { font-family: inherit; cursor: pointer; }
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-optical-sizing: auto;
+  letter-spacing: -0.01em;
+  margin: 0;
+  color: var(--ink);
+}
+
+p { margin: 0; }
+
+::selection { background: var(--brass-wash); color: var(--brass-deep); }
+
+:focus-visible {
+  outline: 2px solid var(--brass);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+/* Reduced motion: honor the user's preference everywhere */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

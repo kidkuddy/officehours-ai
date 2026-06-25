@@ -1,0 +1,37 @@
+*.DS_Store
+node_modules/
+.env
+.env.local
+.env.*.local
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# build artifacts
+web/dist/
+web/*.tsbuildinfo
+web/vite.config.js
+web/vite.config.d.ts
+backend/api
+backend/ohctl
+
+# keep the example committed
+!.env.example
+
+# KB import artifacts
+seed/dump/
+seed/kb/**/imported__*.md
+
+# local secrets (Claude token extracted from macOS keychain)
+.secrets/
+submission/
+backend/bin/
+backend/eval/*.log
+backend/eval/report.json
+
+# dev/test artifacts
+.playwright-mcp/
+*.swp
+landing.png
+oh-landing.png

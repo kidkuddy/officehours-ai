@@ -1,0 +1,70 @@
+services:
+  db:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - "5432:5432"
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      JWT_SECRET: ${JWT_SECRET}
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+      UPLOAD_DIR: ${UPLOAD_DIR:-/data/uploads}
+      SEED_DIR: ${SEED_DIR:-/seed}
+      CONFIG_DIR: ${CONFIG_DIR:-/config}
+      # Agent backend selector: 'claude' (default) | 'gemini'.
+      AGENT_PROVIDER: ${AGENT_PROVIDER:-claude}
+      # Gemini (Vertex AI) settings; only used when AGENT_PROVIDER=gemini.
+      GOOGLE_CLOUD_PROJECT: ${GOOGLE_CLOUD_PROJECT:-pryde-492609}
+      GOOGLE_CLOUD_LOCATION: ${GOOGLE_CLOUD_LOCATION:-global}
+      GOOGLE_GENAI_USE_VERTEXAI: ${GOOGLE_GENAI_USE_VERTEXAI:-true}
+    ports:
+      - "8080:8080"
+    volumes:
+      # Plan A: reuse the host's logged-in Claude subscription.
+      # The real subscription token lives in the macOS keychain, so run
+      # `scripts/sync-claude-creds.sh` on the host first to export it to
+      # ./.secrets/claude-credentials.json (mounted below). The ~/.claude dir is
+      # also mounted for settings; the entrypoint stages creds into the non-root home.
+      - ./.secrets/claude-credentials.json:/claude-cred.json:ro
+      - ${HOME}/.claude:/host-claude:ro
+      # Gemini (Vertex AI) auth via Google ADC. Run on the host first:
+      #   gcloud auth application-default login
+      # The entrypoint stages this into the node user's home.
+      - ${HOME}/.config/gcloud:/host-gcloud:ro
+      - ./seed:/seed:ro
+      - ./config:/config:ro
+      - uploads:/data/uploads
+
+  web:
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    depends_on:
+      - api
+    ports:
+      - "3000:80"
+
+volumes:
+  dbdata:
+  uploads:

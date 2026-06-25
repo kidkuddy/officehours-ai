@@ -1,0 +1,7 @@
+learn:
+  enabled: true
+data_room:
+  enabled: true
+  accept: [".md", ".txt", ".pdf"]
+advisors:
+  unlock_all: true        # MVP: all advisors available

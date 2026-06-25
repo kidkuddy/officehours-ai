@@ -1,0 +1,52 @@
+[
+  {
+    "id": "agritech-overclaim",
+    "expected_stage": "Structuration",
+    "text": "We are an agritech startup in Tunisia building IoT soil sensors and an app that tells smallholder farmers when to irrigate. We have a working prototype deployed on 3 pilot farms and informal interest from a regional cooperative. We have not signed any paying contracts yet and have no revenue. The founding team is two engineers; we are incorporating the company this quarter and writing our first business plan. We believe we are ready to raise a seed round."
+  },
+  {
+    "id": "pure-idea",
+    "expected_stage": "Ideation",
+    "text": "I have an idea for a marketplace that connects home cooks with busy professionals who want home-style meals. I haven't built anything yet and haven't talked to any potential customers. I'm trying to figure out if this is worth pursuing. No team, no prototype, no company."
+  },
+  {
+    "id": "validated-no-product",
+    "expected_stage": "Market Validation",
+    "text": "We interviewed 40 dental clinics about appointment no-shows. 28 said they lose significant revenue and 9 signed letters of intent to pilot a reminder solution. We have detailed problem evidence and a clear target segment, but we are still building the MVP and have no product live yet. Solo founder, not yet incorporated."
+  },
+  {
+    "id": "incorporated-building",
+    "expected_stage": "Structuration",
+    "text": "B2B SaaS for restaurant inventory. We validated the problem with 50 interviews and 5 paid pilots last year. The company is incorporated, we have a CTO and a commercial cofounder, defined roles, a registered trademark, and we are formalizing processes and our financial model. We are not raising yet and the product is in private beta."
+  },
+  {
+    "id": "raising-seed",
+    "expected_stage": "Fundraising",
+    "text": "Fintech for SME invoice financing. Incorporated 18 months ago, 12-person team, live product with 30 paying SMEs and 15k MRR growing 20% MoM. Unit economics are positive on a contribution basis. We have a data room, a pitch deck, financial projections, and we are actively meeting investors to close a $1.5M seed round."
+  },
+  {
+    "id": "prelaunch-gtm",
+    "expected_stage": "Launch Planning",
+    "text": "Consumer wellness app. We raised a small pre-seed, the product is feature-complete and tested with a closed beta of 500 users with strong retention. We have finalized pricing, built the go-to-market plan, lined up launch partners and press, and are preparing for a public launch next month. Not raising right now."
+  },
+  {
+    "id": "scaling-growth",
+    "expected_stage": "Growth",
+    "text": "Logistics SaaS, 6 years old, 80 employees, $4M ARR growing 60% YoY, profitable in our home market. We are expanding into two new countries, scaling the sales team, and optimizing the funnel. Product-market fit is well established with low churn and strong NPS."
+  },
+  {
+    "id": "deeptech-early",
+    "expected_stage": "Ideation",
+    "text": "Two PhD students with a novel battery chemistry concept. We have lab notes and a hypothesis but no working cell yet, no customers, no company. We are exploring whether there is a market and what application to target first."
+  },
+  {
+    "id": "evidence-driven-validation",
+    "expected_stage": "Market Validation",
+    "text": "EdTech for vocational training. We ran 3 paid pilots with training centers, collected completion and satisfaction data showing clear value, and have a waitlist of 12 more centers. Product is a rough but functional MVP. Two cofounders, not yet incorporated, no formal processes, focused on proving demand before structuring the company."
+  },
+  {
+    "id": "structured-not-raising",
+    "expected_stage": "Structuration",
+    "text": "Healthtech triage tool. Incorporated, 6-person team with clear roles, IP filed, validated with several hospital pilots, building out compliance and internal processes and the operating model. Product in controlled rollout. We plan to raise later but right now we are organizing the company and refining the business model, not fundraising."
+  }
+]
