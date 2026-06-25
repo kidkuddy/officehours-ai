@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OfficeHours.ai — Concept &amp; Product</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#0A0A0A;--muted:#6B7280;--line:#E7E7E7;--accent:#1F6FEB;--accent-soft:#EAF1FE;--bg:#FFFFFF;--mono:'JetBrains Mono',monospace}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;background:#0d0d0d;color:var(--ink);-webkit-font-smoothing:antialiased;overflow:hidden}
+  .deck{height:100vh;width:100vw;position:relative}
+  .slide{position:absolute;inset:0;display:none;background:var(--bg);padding:6.5vh 7vw;flex-direction:column;justify-content:center}
+  .slide.active{display:flex;animation:fade .35s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  .kicker{font-family:var(--mono);font-size:.72rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem;display:flex;align-items:center;gap:.6rem}
+  .kicker::before{content:"";width:24px;height:2px;background:var(--accent)}
+  h2{font-size:clamp(1.7rem,3.6vw,2.9rem);font-weight:800;letter-spacing:-.02em;line-height:1.08;max-width:1000px}
+  .lead{font-size:clamp(1rem,1.6vw,1.3rem);color:var(--muted);font-weight:400;line-height:1.5;max-width:820px;margin-top:1.1rem}
+  ul.pts{list-style:none;margin-top:1.6rem;max-width:920px}
+  ul.pts li{font-size:clamp(.98rem,1.5vw,1.2rem);font-weight:500;padding:.7rem 0 .7rem 1.7rem;position:relative;border-top:1px solid var(--line);color:#1c1c1c;line-height:1.4}
+  ul.pts li:last-child{border-bottom:1px solid var(--line)}
+  ul.pts li::before{content:"";position:absolute;left:0;top:1.15rem;width:8px;height:8px;border-radius:50%;background:var(--accent)}
+  ul.pts li b{font-weight:800}
+  table{border-collapse:collapse;margin-top:1.5rem;width:100%;max-width:1040px;font-size:clamp(.82rem,1.25vw,1.02rem)}
+  th,td{border:1px solid var(--line);padding:.6rem .85rem;text-align:left;vertical-align:top}
+  th{background:var(--accent-soft);font-weight:700;color:#173a6b}
+  td b{font-weight:700}
+  td .mono,.mono{font-family:var(--mono);font-size:.85em;color:var(--accent)}
+  .cols{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;margin-top:1.6rem}
+  .card{border:1px solid var(--line);border-radius:14px;padding:1.3rem 1.25rem}
+  .card .t{font-weight:800;font-size:1.1rem}
+  .card .t .n{font-family:var(--mono);color:var(--accent);font-size:.8rem;display:block;margin-bottom:.3rem}
+  .card .d{color:var(--muted);font-size:.92rem;margin-top:.5rem;line-height:1.5}
+  .flow{display:flex;align-items:stretch;gap:0;margin-top:1.8rem;flex-wrap:wrap}
+  .fbox{border:1px solid var(--line);border-radius:12px;padding:1rem 1.1rem;background:#fafafa;min-width:150px}
+  .fbox .ft{font-weight:800;font-size:1rem}
+  .fbox .fd{color:var(--muted);font-size:.82rem;margin-top:.3rem;line-height:1.4}
+  .farrow{display:flex;align-items:center;color:var(--accent);font-weight:800;padding:0 .6rem;font-size:1.2rem}
+  .vocab{display:grid;grid-template-columns:repeat(2,1fr);gap:.5rem 2rem;margin-top:1.5rem;max-width:1000px}
+  .vocab div{font-size:clamp(.9rem,1.4vw,1.1rem);padding:.4rem 0;border-bottom:1px solid var(--line)}
+  .vocab b{font-weight:800}
+  .formula{font-family:var(--mono);background:#0f1115;color:#eaeaea;padding:1rem 1.3rem;border-radius:10px;margin-top:1.4rem;font-size:clamp(.85rem,1.4vw,1.05rem);max-width:760px}
+  .foot{position:absolute;left:7vw;right:7vw;bottom:3.2vh;display:flex;justify-content:space-between;align-items:center;font-size:.75rem;color:var(--muted);font-weight:600}
+  .wordmark{font-weight:900;color:var(--ink);letter-spacing:-.02em}
+  .wordmark .dot{color:var(--accent)}
+  .pageno{font-variant-numeric:tabular-nums}
+  .title-slide{justify-content:center}
+  .title-slide .big-mark{font-size:clamp(3rem,10vw,7.5rem);font-weight:900;letter-spacing:-.05em;line-height:.95}
+  .title-slide .big-mark .dot{color:var(--accent)}
+  .title-slide .tag{font-size:clamp(1rem,2.2vw,1.7rem);font-weight:500;color:var(--muted);margin-top:1.2rem}
+  .badge{display:inline-block;background:var(--accent-soft);color:#173a6b;font-family:var(--mono);font-weight:500;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;padding:.5rem .9rem;border-radius:999px;margin-bottom:1.8rem;width:fit-content}
+  .progress{position:fixed;top:0;left:0;height:3px;background:var(--accent);z-index:50;transition:width .3s ease}
+  .hint{position:fixed;bottom:12px;left:50%;transform:translateX(-50%);font-size:.7rem;color:#bbb;z-index:50;background:rgba(255,255,255,.7);padding:4px 12px;border-radius:999px}
+  @media print{
+    @page{size:1280px 720px;margin:0}
+    body{overflow:visible;background:#fff}
+    .deck{height:auto}
+    .slide,.slide.active{display:flex!important;position:relative;inset:auto;page-break-after:always;width:1280px;height:720px;padding:54px 76px;animation:none!important;opacity:1!important}
+    .progress,.hint{display:none!important}
+  }
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<div class="deck" id="deck">
+
+  <!-- 1 COVER -->
+  <section class="slide title-slide active">
+    <span class="badge">AINS Hackathon 2026 · Concept &amp; Product</span>
+    <div class="big-mark">OfficeHours<span class="dot">.ai</span></div>
+    <div class="tag">How the diagnostic, scoring &amp; orientation engine works.</div>
+    <div class="foot"><span class="wordmark">OfficeHours<span class="dot">.ai</span></span><span class="pageno">01</span></div>
+  </section>
+
+  <!-- 2 PROBLEM -->
+  <section class="slide">
+    <div class="kicker">The problem</div>
+    <h2>Founders can't see where they actually stand.</h2>
+    <ul class="pts">
+      <li><b>Self-perception ≠ reality.</b> Founders claim to be "financing-ready" with no validated model — and orientation tools just reflect that inaccurate self-image back.</li>
+      <li><b>Tools answer, they don't diagnose.</b> Static guides and generic chatbots give information, never a structured assessment of where a project stands.</li>
+      <li><b>Resources are fragmented &amp; generic.</b> Programs, funding, and procedures aren't matched to a specific project profile.</li>
+      <li><b>The outcome:</b> of 1,000+ startups under the Startup Act, fewer than 10 reach VC-grade success.</li>
+    </ul>
+    <div class="foot"><span class="wordmark">OfficeHours<span class="dot">.ai</span></span><span class="pageno">02</span></div>
+  </section>
+
+  <!-- 3 VISION -->
+  <section class="slide">
+    <div class="kicker">The idea</div>
+    <h2>One profile at the center. Three intelligences around it.</h2>
+    <p class="lead">A founder describes their company once; that profile becomes the spine. A diagnostic engine classifies it, an explainable scoring engine evaluates it, and a grounded orientation engine points to real next steps. The differentiator is that the three <b>interact</b> — they don't just coexist as panels.</p>
+    <div class="foot"><span class="wordmark">OfficeHours<span class="dot">.ai</span></span><span class="pageno">03</span></div>
+  </section>
+
+  <!-- 4 PRODUCT + VOCAB -->
+  <section class="slide">
+    <div class="kicker">The product</div>
+    <h2>It works like real office hours.</h2>
+    <p class="lead">Founders hold sessions with specialist AI <b>Advisors</b> that have already read their file. Each session ends with tracked next steps.</p>
+    <div class="vocab">
+      <div><b>Advisor</b> — an AI agent specialized in one domain (Product, GTM, Fundraising, Pitch…).</div>
+      <div><b>Signals</b> — the multi-dimensional readiness scores, re-evaluated each session.</div>
+      <div><b>Office Hours</b> — a working session; the advisor opens and leads.</div>
+      <div><b>Action Items</b> — next steps, each grounded in a real program.</div>
+      <div><b>Profile</b> — the living file: data room, history, current signals.</div>
+      <div><b>Logbook</b> — the timeline of stage changes, scores, and actions.</div>
+    </div>
+    <div class="foot"><span class="wordmark">OfficeHours<span class="dot">.ai</span></span><span class="pageno">04</span></div>
+  </section>
+
+  <!-- 5 ARCHITECTURE FLOW -->
+  <section class="slide">
+    <div class="kicker">How it fits together</div>
+    <h2>The conversation is the interface. Three engines are the brain.</h2>
+    <div class="flow">
+      <div class="fbox"><div class="ft">Founder</div><div class="fd">Describes the company; holds office hours.</div></div>
+      <div class="farrow">→</div>
+      <div class="fbox"><div class="ft">Advisor agent</div><div class="fd">Reads the profile, leads the session.</div></div>
+      <div class="farrow">→</div>
+      <div class="fbox"><div class="ft">Diagnostic</div><div class="fd">Maturity stage + evidence.</div></div>
+      <div class="farrow">+</div>
+      <div class="fbox"><div class="ft">Scoring</div><div class="fd">5 explainable Signals.</div></div>
+      <div class="farrow">+</div>
+      <div class="fbox"><div class="ft">Orientation</div><div class="fd">Grounded next steps from the KB.</div></div>
+    </div>
+    <p class="lead">All three read and write a shared <b>Profile</b> (data room + signals + logbook), drawing on advisor <b>Playbooks</b> and a real-program <b>knowledge base</b>.</p>
+    <div class="foot"><span class="wordmark">OfficeHours<span class="dot">.ai</span></span><span class="pageno">05</span></div>
+  </section>
+
+  <!-- 6 ENGINE 1: TAXONOMY -->
+  <section class="slide">
+    <div class="kicker">Engine 1 · Diagnosis</div>
+    <h2>A six-stage maturity taxonomy, classified from evidence.</h2>
+    <table>
+      <tr><th>Phase</th><th>Stage</th><th>The question it answers</th></tr>
+      <tr><td><b>Discover</b></td><td>1 · Ideation</td><td>Is there a clearly defined problem worth solving?</td></tr>
+      <tr><td><b>Discover</b></td><td>2 · Market Validation</td><td>Is there evidence real customers want this?</td></tr>
+      <tr><td><b>Validate</b></td><td>3 · Structuration</td><td>Is the business structured (legal, team, model)?</td></tr>
+      <tr><td><b>Validate</b></td><td>4 · Launch Planning</td><td>Is the offer ready to go to market?</td></tr>
+      <tr><td><b>Scale</b></td><td>5 · Fundraising</td><td>Is it investable on its fundamentals?</td></tr>
+      <tr><td><b>Scale</b></td><td>6 · Growth</td><td>Is growth repeatable without linear cost?</td></tr>
+    </table>
+    <p class="lead">Every classification is tied to the data points behind it. To advance, a startup passes a <b>stage-gate</b> — the gate opens on evidence, not self-assessment.</p>
+    <div class="foot"><span class="wordmark">OfficeHours<span class="dot">.ai</span></span><span class="pageno">06</span></div>
+  </section>
+
+  <!-- 7 ENGINE 2: SIGNALS -->
+  <section class="slide">
+    <div class="kicker">Engine 2 · Scoring</div>
+    <h2>Five explainable Signals, on a stress-test framework.</h2>
+    <table>
+      <tr><th>Framework</th><th>Signal</th><th>Sub-criteria (weighted)</th></tr>
+      <tr><td><b>Desirability</b></td><td>Market</td><td>Customer validation · market size &amp; competition · revenue model</td></tr>
+      <tr><td rowspan="2"><b>Feasibility</b></td><td>Innovation</td><td>Local novelty · tech intensity · barrier to entry</td></tr>
+      <tr><td>Scalability</td><td>Replicability without linear cost · manual dependency · deployment cost</td></tr>
+      <tr><td rowspan="2"><b>Viability</b></td><td>Commercial Offer</td><td>Value-prop clarity · product readiness · pricing · offer↔need fit</td></tr>
+      <tr><td>Green</td><td>Sustainability · SDG alignment · resource efficiency</td></tr>
+    </table>
+    <div class="foot"><span class="wordmark">OfficeHours<span class="dot">.ai</span></span><span class="pageno">07</span></div>
+  </section>
+
+  <!-- 8 SCORING METHOD -->
+  <section class="slide">
+    <div class="kicker">Scoring method</div>
+    <h2>Composite scores are not averages.</h2>
+    <p class="lead">Each Signal decomposes into weighted sub-criteria with a per-criterion contribution and a plain-language reason. When a <b>fundamental</b> sub-criterion falls below a floor, it <b>caps</b> the whole score — strong scores elsewhere can't paper over a missing fundamental.</p>
+    <div class="formula">F = 2.0&nbsp;&nbsp;·&nbsp;&nbsp;composite = min( weighted_mean , fundamental_score + 0.5 )</div>
+    <ul class="pts">
+      <li><b>Anomaly detection</b> — flags contradictions (high claimed traction, zero validation).</li>
+      <li><b>Improvement guidance</b> — names the highest-leverage gap per Signal + a concrete action.</li>
+    </ul>
+    <div class="foot"><span class="wordmark">OfficeHours<span class="dot">.ai</span></span><span class="pageno">08</span></div>
+  </section>
+
+  <!-- 9 ENGINE 3: ORIENTATION -->
+  <section class="slide">
+    <div class="kicker">Engine 3 · Orientation</div>
+    <h2>Every recommendation is grounded in a real program.</h2>
+    <ul class="pts">
+      <li><b>Real knowledge base</b> — APII, BFPME, BTS, Startup Act, ANPE, incubators, plus AFD / EU / UNDP funding, ingested from heterogeneous docs.</li>
+      <li><b>Retrieval is traceable</b> — every recommended resource cites its source; the assistant never names a program from memory.</li>
+      <li><b>Roadmap, not a list</b> — ordered action items with rationale and time horizons (immediate / short / medium).</li>
+    </ul>
+    <div class="foot"><span class="wordmark">OfficeHours<span class="dot">.ai</span></span><span class="pageno">09</span></div>
+  </section>
+
+  <!-- 10 SESSION LOOP -->
+  <section class="slide">
+    <div class="kicker">The session loop</div>
+    <h2>Advisors lead. Sessions compound.</h2>
+    <div class="flow">
+      <div class="fbox"><div class="ft">Open</div><div class="fd">Advisor speaks first, asks one focused question.</div></div>
+      <div class="farrow">→</div>
+      <div class="fbox"><div class="ft">Advise</div><div class="fd">Short, grounded turns citing real programs.</div></div>
+      <div class="farrow">→</div>
+      <div class="fbox"><div class="ft">Conclude</div><div class="fd">Re-score Signals, set goals &amp; action items.</div></div>
+      <div class="farrow">→</div>
+      <div class="fbox"><div class="ft">Log</div><div class="fd">Changes recorded to the Logbook timeline.</div></div>
+    </div>
+    <p class="lead">Around it: <b>Learn</b> concept tutors (Lean Startup, The Mom Test, Zero to One…) and a <b>Data Room</b> that indexes uploads into the founder's own retrieval collection.</p>
+    <div class="foot"><span class="wordmark">OfficeHours<span class="dot">.ai</span></span><span class="pageno">10</span></div>
+  </section>
+
+  <!-- 11 INTEGRATION -->
+  <section class="slide">
+    <div class="kicker">Cross-module integration</div>
+    <h2>A gap in one engine drives the others.</h2>
+    <p class="lead">A diagnostic gap (missing market validation) triggers retrieval of programs that address it; a low sub-score surfaces a targeted roadmap action; the advisor's reply references the founder's actual stage, Signals, and cited sources. The shared profile is the spine that connects them.</p>
+    <div class="foot"><span class="wordmark">OfficeHours<span class="dot">.ai</span></span><span class="pageno">11</span></div>
+  </section>
+
+  <!-- 12 EXPLAINABILITY -->
+  <section class="slide">
+    <div class="kicker">Explainability</div>
+    <h2>Every output is traceable.</h2>
+    <ul class="pts">
+      <li><b>Why this stage</b> — the classification links to the specific evidence behind it.</li>
+      <li><b>Why this score</b> — per-criterion contributions, weights, a written rationale, and a <span class="mono">CAPPED</span> badge when a fundamental floors it.</li>
+      <li><b>Why this recommendation</b> — it points back to a named program in the knowledge base.</li>
+      <li><b>What we don't know</b> — incomplete profiles surface uncertainty instead of guessing.</li>
+    </ul>
+    <div class="foot"><span class="wordmark">OfficeHours<span class="dot">.ai</span></span><span class="pageno">12</span></div>
+  </section>
+
+  <!-- 13 EVALUATION -->
+  <section class="slide">
+    <div class="kicker">Evaluation</div>
+    <h2>We measure the diagnosis, not just the vibe.</h2>
+    <ul class="pts">
+      <li><b>Protocol</b> — a labeled set of founder profiles run end-to-end through the real diagnoser.</li>
+      <li><b>Metric</b> — maturity-stage classification accuracy (exact and within-one-stage), plus Signal consistency across repeated inputs.</li>
+      <li><b>Edge cases</b> — incomplete or contradictory profiles are handled gracefully.</li>
+    </ul>
+    <div class="foot"><span class="wordmark">OfficeHours<span class="dot">.ai</span></span><span class="pageno">13</span></div>
+  </section>
+
+  <!-- 14 TECH -->
+  <section class="slide">
+    <div class="kicker">Under the hood</div>
+    <h2>The stack.</h2>
+    <div class="cols">
+      <div class="card"><div class="t"><span class="n">AGENTS</span>Claude &amp; Gemini</div><div class="d">Headless tool-using agents, provider switchable by env. The agent drives a CLI to read context and persist results.</div></div>
+      <div class="card"><div class="t"><span class="n">DATA + RAG</span>Postgres</div><div class="d">One store for profiles, signals, sessions, and a full-text retrieval index over the program knowledge base.</div></div>
+      <div class="card"><div class="t"><span class="n">DELIVERY</span>Go · React · Docker</div><div class="d">Go API + React UI, the whole system in docker-compose. FR/AR-ready for the local population.</div></div>
+    </div>
+    <div class="foot"><span class="wordmark">OfficeHours<span class="dot">.ai</span></span><span class="pageno">14</span></div>
+  </section>
+
+  <!-- 15 ROADMAP + TEAM -->
+  <section class="slide">
+    <div class="kicker">What's next</div>
+    <h2>From hackathon MVP to a founder's standing desk.</h2>
+    <ul class="pts">
+      <li>Pilot with a Tunisian incubator cohort and gather real user feedback.</li>
+      <li>Grow the program knowledge base with the PNUD / GEWEET ecosystem.</li>
+      <li>Track founders over time as their gap closes — a real "Mon Parcours."</li>
+    </ul>
+    <p class="lead" style="margin-top:1.4rem">Team — <b>The Jew, the Sad &amp; the Buggy.</b></p>
+    <div class="foot"><span class="wordmark">OfficeHours<span class="dot">.ai</span></span><span class="pageno">15</span></div>
+  </section>
+
+</div>
+<div class="hint">← → or Space · F fullscreen · P to print/PDF</div>
+<script>
+  const slides=[...document.querySelectorAll('.slide')];let i=0;const prog=document.getElementById('progress');
+  function show(n){i=Math.max(0,Math.min(slides.length-1,n));slides.forEach((s,k)=>s.classList.toggle('active',k===i));prog.style.width=((i+1)/slides.length*100)+'%';}
+  document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){e.preventDefault();show(i+1);}else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();show(i-1);}else if(e.key==='Home'){show(0);}else if(e.key==='End'){show(slides.length-1);}else if(e.key.toLowerCase()==='f'){if(!document.fullscreenElement)document.documentElement.requestFullscreen();else document.exitFullscreen();}else if(e.key.toLowerCase()==='p'){window.print();}});
+  document.addEventListener('click',e=>{if(e.clientX>window.innerWidth*0.5)show(i+1);else show(i-1);});
+  show(0);
+</script>
+</body>
+</html>
