@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OfficeHours.ai — AINS Hackathon 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0A0A0A;
+    --muted:#6B7280;
+    --line:#E7E7E7;
+    --accent:#FB651E;        /* YC orange */
+    --accent-soft:#FFF1EA;
+    --bg:#FFFFFF;
+    --maxw:1000px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
+    background:#0d0d0d;
+    color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+    overflow:hidden;
+  }
+  .deck{height:100vh;width:100vw;position:relative}
+  .slide{
+    position:absolute;inset:0;
+    display:none;
+    background:var(--bg);
+    padding:7vh 8vw;
+    flex-direction:column;
+    justify-content:center;
+  }
+  .slide.active{display:flex;animation:fade .35s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+  .kicker{
+    font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--accent);margin-bottom:1.4rem;display:flex;align-items:center;gap:.6rem;
+  }
+  .kicker::before{content:"";width:26px;height:3px;background:var(--accent);border-radius:2px}
+
+  h1{font-size:clamp(2.4rem,6vw,5rem);font-weight:900;letter-spacing:-.03em;line-height:1.02}
+  h2{font-size:clamp(1.9rem,4.2vw,3.2rem);font-weight:800;letter-spacing:-.02em;line-height:1.08;max-width:var(--maxw)}
+  .lead{font-size:clamp(1.05rem,1.9vw,1.5rem);color:var(--muted);font-weight:400;line-height:1.5;max-width:760px;margin-top:1.6rem}
+  p{line-height:1.55}
+
+  ul.points{list-style:none;margin-top:2.4rem;max-width:880px}
+  ul.points li{
+    font-size:clamp(1rem,1.7vw,1.4rem);font-weight:500;line-height:1.4;
+    padding:1rem 0 1rem 2.2rem;position:relative;border-top:1px solid var(--line);color:#1c1c1c;
+  }
+  ul.points li:last-child{border-bottom:1px solid var(--line)}
+  ul.points li::before{
+    content:"";position:absolute;left:0;top:1.5rem;width:9px;height:9px;border-radius:50%;
+    background:var(--accent);
+  }
+  ul.points li b{font-weight:800}
+  ul.points li span.sub{display:block;font-size:.95rem;color:var(--muted);font-weight:400;margin-top:.35rem}
+
+  /* numbered flow */
+  ol.flow{list-style:none;counter-reset:step;margin-top:2.4rem;max-width:920px}
+  ol.flow li{
+    counter-increment:step;position:relative;padding:1.05rem 0 1.05rem 3.6rem;
+    border-top:1px solid var(--line);font-size:clamp(1rem,1.6vw,1.32rem);font-weight:500;line-height:1.4;
+  }
+  ol.flow li:last-child{border-bottom:1px solid var(--line)}
+  ol.flow li::before{
+    content:counter(step);position:absolute;left:0;top:50%;transform:translateY(-50%);
+    width:34px;height:34px;border-radius:50%;background:var(--ink);color:#fff;
+    font-size:.95rem;font-weight:800;display:flex;align-items:center;justify-content:center;
+  }
+  ol.flow li b{font-weight:800}
+
+  /* stat block */
+  .stats{display:flex;gap:5vw;margin-top:3rem;flex-wrap:wrap}
+  .stat .big{font-size:clamp(3rem,8vw,6.5rem);font-weight:900;letter-spacing:-.04em;line-height:1}
+  .stat .big.accent{color:var(--accent)}
+  .stat .cap{font-size:1rem;color:var(--muted);margin-top:.6rem;max-width:260px;font-weight:500}
+
+  /* columns / cards */
+  .cols{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;margin-top:2.6rem}
+  .card{border:1px solid var(--line);border-radius:16px;padding:1.6rem 1.5rem;background:#fff}
+  .card .t{font-weight:800;font-size:1.2rem;letter-spacing:-.01em}
+  .card .t .dot{color:var(--accent)}
+  .card .d{color:var(--muted);font-size:.98rem;margin-top:.7rem;line-height:1.5}
+  .card ul{list-style:none;margin-top:.9rem}
+  .card ul li{font-size:.95rem;color:#1c1c1c;padding:.32rem 0 .32rem 1rem;position:relative}
+  .card ul li::before{content:"–";position:absolute;left:0;color:var(--accent)}
+
+  /* journey rail */
+  .rail{display:flex;gap:0;margin-top:3rem;align-items:stretch}
+  .phase{flex:1;border:1px solid var(--line);border-right:none;padding:1.6rem 1.4rem;position:relative}
+  .phase:last-child{border-right:1px solid var(--line);border-radius:0 16px 16px 0}
+  .phase:first-child{border-radius:16px 0 0 16px}
+  .phase .ph{font-weight:900;font-size:1.3rem;letter-spacing:-.01em}
+  .phase .ph .n{color:var(--accent);font-size:.8rem;display:block;letter-spacing:.12em;margin-bottom:.4rem;font-weight:700}
+  .phase .st{font-size:.92rem;color:var(--muted);margin-top:.7rem;line-height:1.5}
+  .gate{text-align:center;color:var(--accent);font-weight:800;font-size:1.4rem;display:flex;align-items:center;padding:0 .2rem}
+
+  /* footer / chrome */
+  .foot{position:absolute;left:8vw;right:8vw;bottom:3.5vh;display:flex;justify-content:space-between;align-items:center;
+    font-size:.8rem;color:var(--muted);font-weight:600;letter-spacing:.02em}
+  .wordmark{font-weight:900;color:var(--ink);letter-spacing:-.02em}
+  .wordmark .dot{color:var(--accent)}
+  .pageno{font-variant-numeric:tabular-nums}
+
+  /* title slide special */
+  .title-slide{justify-content:center}
+  .title-slide .big-mark{font-size:clamp(3.5rem,12vw,9rem);font-weight:900;letter-spacing:-.05em;line-height:.95}
+  .title-slide .big-mark .dot{color:var(--accent)}
+  .title-slide .tag{font-size:clamp(1.1rem,2.4vw,1.9rem);font-weight:500;color:var(--muted);margin-top:1.6rem;letter-spacing:-.01em}
+  .badge{display:inline-block;background:var(--accent-soft);color:var(--accent);font-weight:700;font-size:.8rem;
+    letter-spacing:.1em;text-transform:uppercase;padding:.5rem .9rem;border-radius:999px;margin-bottom:2.2rem;width:fit-content}
+
+  /* progress bar */
+  .progress{position:fixed;top:0;left:0;height:3px;background:var(--accent);z-index:50;transition:width .3s ease}
+
+  /* nav hint */
+  .hint{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);font-size:.72rem;color:#bbb;z-index:50;
+    background:rgba(255,255,255,.7);padding:4px 12px;border-radius:999px;backdrop-filter:blur(6px)}
+
+  /* PRINT: one slide per page for PDF export */
+  @media print{
+    @page{size:1280px 720px;margin:0}
+    body{overflow:visible;background:#fff}
+    .deck{height:auto}
+    .slide, .slide.active{display:flex!important;position:relative;inset:auto;page-break-after:always;
+      width:1280px;height:720px;padding:64px 96px;animation:none!important;opacity:1!important}
+    .progress,.hint{display:none!important}
+  }
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<div class="deck" id="deck">
+
+  <!-- 1 TITLE -->
+  <section class="slide title-slide active">
+    <span class="badge">AINS Hackathon 2026</span>
+    <div class="big-mark">OfficeHours<span class="dot">.ai</span></div>
+    <div class="tag">Office hours for founders, on demand.</div>
+    <p class="lead">An AI advisory platform that diagnoses where a startup actually stands — and tells it what to do next.</p>
+    <div class="foot"><span class="wordmark">OfficeHours<span class="dot">.ai</span></span><span class="pageno">01</span></div>
+  </section>
+
+  <!-- TEAM -->
+  <section class="slide">
+    <div class="kicker">The Team</div>
+    <h1 style="font-size:clamp(2rem,6vw,4.6rem)">The Jew, the Sad<br>&amp; the Buggy<span style="color:var(--accent)">.</span></h1>
+    <p class="lead">Building OfficeHours.ai for the AINS Hackathon 2026.</p>
+    <div class="foot"><span class="wordmark">OfficeHours<span class="dot">.ai</span></span><span class="pageno">02</span></div>
+  </section>
+
+  <!-- 2 PROBLEM -->
+  <section class="slide">
+    <div class="kicker">The Problem</div>
+    <h2>Tunisian founders are better at pitching than at building.</h2>
+    <p class="lead">Strong decks attract praise. Praise feeds confirmation bias and a chase for vanity metrics — so founders mistake momentum for progress and double down on the wrong things.</p>
+    <div class="stats">
+      <div class="stat"><div class="big">1,000+</div><div class="cap">startups labeled under the Startup Act</div></div>
+      <div class="stat"><div class="big accent">&lt;10</div><div class="cap">meet VC standards of success</div></div>
+    </div>
+    <div class="foot"><span class="wordmark">OfficeHours<span class="dot">.ai</span></span><span class="pageno">03</span></div>
+  </section>
+
+  <!-- 3 USERS -->
+  <section class="slide">
+    <div class="kicker">Who It's For</div>
+    <h2>The people who need honest guidance most.</h2>
+    <ul class="points">
+      <li><b>Early- and growth-stage founders</b> in Tunisia &amp; MENA — pre-seed to early revenue.</li>
+      <li><b>Aspiring founders &amp; students</b> who want to learn entrepreneurship by doing.</li>
+      <li><b>Incubators &amp; programs</b> that need to advise more founders than their mentors can cover.</li>
+    </ul>
+    <div class="foot"><span class="wordmark">OfficeHours<span class="dot">.ai</span></span><span class="pageno">04</span></div>
+  </section>
+
+  <!-- 4 CONCEPT -->
+  <section class="slide">
+    <div class="kicker">The Concept</div>
+    <h2>Real office hours — with specialist Advisors.</h2>
+    <ul class="points">
+      <li>A founder books a session with an <b>Advisor</b> — Product, Go-to-Market, Fundraising, Pitch — and pitches their startup.</li>
+      <li>Each Advisor is an AI agent that reasons from the company's <b>Dossier</b>: its <b>Data Room</b> (deck, BP, financials), its history, and its current <b>Signals</b>.</li>
+      <li>Sessions produce <b>Action Items</b>, tracked in the <b>Logbook</b> and carried into the next session as context.</li>
+    </ul>
+    <div class="foot"><span class="wordmark">OfficeHours<span class="dot">.ai</span></span><span class="pageno">05</span></div>
+  </section>
+
+  <!-- 5 HOW IT WORKS -->
+  <section class="slide">
+    <div class="kicker">How It Works</div>
+    <h2>Pitch. Get feedback. Earn the next room.</h2>
+    <ol class="flow">
+      <li>Founder starts a session and <b>pitches the Advisor</b>. Materials upload up front, later, or mid-conversation.</li>
+      <li>The Advisor probes and gives feedback. <b>Takeaways, Action Items, and Signals are recorded and monitored.</b></li>
+      <li><b>Advisors unlock as the startup earns it</b> — you start with the Product Advisor; Go-to-Market stays locked until the problem is validated.</li>
+      <li>Founder works the items; the <b>Logbook</b> tracks progress; <b>Signals re-evaluate after each session.</b></li>
+    </ol>
+    <div class="foot"><span class="wordmark">OfficeHours<span class="dot">.ai</span></span><span class="pageno">06</span></div>
+  </section>
+
+  <!-- 6 CORE AI -->
+  <section class="slide">
+    <div class="kicker">Core AI Mechanism</div>
+    <h2>Every Advisor runs the same four-step engine.</h2>
+    <div class="cols" style="grid-template-columns:repeat(4,1fr);gap:1rem">
+      <div class="card">
+        <div style="font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:.5rem">Step 01</div>
+        <div class="t">Read</div>
+        <div class="d">Ingests the Dossier — deck, business plan, financials, and past sessions.</div>
+      </div>
+      <div class="card">
+        <div style="font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:.5rem">Step 02</div>
+        <div class="t">Diagnose</div>
+        <div class="d">Places the startup at a maturity stage, tied to the evidence behind it.</div>
+      </div>
+      <div class="card">
+        <div style="font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:.5rem">Step 03</div>
+        <div class="t">Score</div>
+        <div class="d">Computes the Signals across weighted criteria, with a per-criterion breakdown.</div>
+      </div>
+      <div class="card">
+        <div style="font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:.5rem">Step 04</div>
+        <div class="t">Orient</div>
+        <div class="d">Turns each gap into an Action Item matched to a real program, with the source attached.</div>
+      </div>
+    </div>
+    <p class="lead" style="margin-top:2rem">Advisors draw on admin-managed <b style="color:#1c1c1c">Playbooks</b> and a catalogue of national &amp; international support and financing programs.</p>
+    <div class="foot"><span class="wordmark">OfficeHours<span class="dot">.ai</span></span><span class="pageno">07</span></div>
+  </section>
+
+  <!-- 7 JOURNEY -->
+  <section class="slide">
+    <div class="kicker">The Journey</div>
+    <h2>From idea to scale, one gate at a time.</h2>
+    <div class="rail">
+      <div class="phase"><div class="ph"><span class="n">PHASE 01</span>Discover</div><div class="st">Ideation · Market Validation</div></div>
+      <div class="gate">▸</div>
+      <div class="phase"><div class="ph"><span class="n">PHASE 02</span>Validate</div><div class="st">Structuration · Launch Planning</div></div>
+      <div class="gate">▸</div>
+      <div class="phase"><div class="ph"><span class="n">PHASE 03</span>Scale</div><div class="st">Fundraising · Growth</div></div>
+    </div>
+    <p class="lead" style="margin-top:2.4rem">To move up a phase, a startup passes a <b style="color:#1c1c1c">Stage-Gate Review</b> where its Signals have to clear the gate's criteria.</p>
+    <div class="foot"><span class="wordmark">OfficeHours<span class="dot">.ai</span></span><span class="pageno">08</span></div>
+  </section>
+
+  <!-- 8 SIGNALS -->
+  <section class="slide">
+    <div class="kicker">The Scoring Model</div>
+    <h2>Signals, built on the stress-test framework.</h2>
+    <div class="cols">
+      <div class="card">
+        <div class="t">Desirability<span class="dot">.</span></div>
+        <ul><li>Problem-fit defined</li><li>Customer validation</li><li>Market size &amp; competition</li></ul>
+      </div>
+      <div class="card">
+        <div class="t">Feasibility<span class="dot">.</span></div>
+        <ul><li>Tech score</li><li>Product readiness</li><li>Scalability &amp; manual dependency</li></ul>
+      </div>
+      <div class="card">
+        <div class="t">Viability<span class="dot">.</span></div>
+        <ul><li>Revenue model &amp; pricing</li><li>Unit economics</li><li>Sustainability &amp; SDG alignment</li></ul>
+      </div>
+    </div>
+    <p class="lead" style="margin-top:2rem">When a fundamental dimension scores low, it caps the whole result. Strong scores elsewhere cannot lift it back up.</p>
+    <div class="foot"><span class="wordmark">OfficeHours<span class="dot">.ai</span></span><span class="pageno">09</span></div>
+  </section>
+
+  <!-- THANKS -->
+  <section class="slide title-slide">
+    <div class="big-mark">Thank you<span class="dot">.</span></div>
+    <p class="lead">OfficeHours.ai — office hours for founders, on demand.</p>
+    <div class="foot"><span class="wordmark">OfficeHours<span class="dot">.ai</span></span><span class="pageno">10</span></div>
+  </section>
+
+</div>
+
+<div class="hint">← → or Space to navigate · F fullscreen · P to print/PDF</div>
+
+<script>
+  const slides=[...document.querySelectorAll('.slide')];
+  let i=0;
+  const prog=document.getElementById('progress');
+  function show(n){
+    i=Math.max(0,Math.min(slides.length-1,n));
+    slides.forEach((s,k)=>s.classList.toggle('active',k===i));
+    prog.style.width=((i+1)/slides.length*100)+'%';
+  }
+  document.addEventListener('keydown',e=>{
+    if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){e.preventDefault();show(i+1);}
+    else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();show(i-1);}
+    else if(e.key==='Home'){show(0);}
+    else if(e.key==='End'){show(slides.length-1);}
+    else if(e.key.toLowerCase()==='f'){if(!document.fullscreenElement)document.documentElement.requestFullscreen();else document.exitFullscreen();}
+    else if(e.key.toLowerCase()==='p'){window.print();}
+  });
+  document.addEventListener('click',e=>{if(e.clientX>window.innerWidth*0.5)show(i+1);else show(i-1);});
+  show(0);
+</script>
+</body>
+</html>
